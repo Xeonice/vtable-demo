@@ -12,17 +12,22 @@
     "dev": {
       "name": "dev",
       "command": "npm run dev",
-      "runAtStart": true
+      "runAtStart": true,
+      "preview": {
+        "port": 5173
+      }
     },
     "build": {
       "name": "build",
-      "command": "npm run build",
-      "runAtStart": false
+      "command": "npm run build"
     },
     "preview": {
       "name": "preview",
-      "command": "npm run preview",
-      "runAtStart": false
+      "command": "npm run preview"
+    },
+    "npm install @visactor/vchart@latest": {
+      "name": "Upgrading @visactor/vchart",
+      "command": "npm install @visactor/vchart@latest"
     }
   }
 }

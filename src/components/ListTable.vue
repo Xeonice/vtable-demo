@@ -3,10 +3,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import { ListTable } from "@visactor/vtable";
 
 const listTableRef = ref();
+const tableInstance = shallowRef();
 
 const records = [
   {
@@ -324,9 +325,9 @@ const option = {
 };
 
 onMounted(() => {
-  const listTable = new ListTable(listTableRef.value, option);
+  tableInstance.value = new ListTable(listTableRef.value, option);
 
-  listTable.on("click_cell", (params) => {
+  tableInstance.value.on("click_cell", (params) => {
     console.log(params);
   });
 });

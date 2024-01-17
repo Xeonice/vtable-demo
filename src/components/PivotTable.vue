@@ -3,10 +3,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import { PivotTable } from "@visactor/vtable";
 
 const pivotTableRef = ref();
+const tableInstance = shallowRef();
 
 const records = [
   {
@@ -280,9 +281,9 @@ const option = {
 };
 
 onMounted(() => {
-  const pivotTable = new PivotTable(pivotTableRef.value, option);
+  tableInstance.value = new PivotTable(pivotTableRef.value, option);
 
-  pivotTable.on("click_cell", (params) => {
+  tableInstance.value.on("click_cell", (params) => {
     console.log(params);
   });
 });

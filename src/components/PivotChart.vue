@@ -3,12 +3,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import * as VTable from "@visactor/vtable";
 import { PivotChart } from "@visactor/vtable";
 import VChart from "@visactor/vchart";
 
 const pivotChartRef = ref();
+const tableInstance = shallowRef();
 
 VTable.register.chartModule("vchart", VChart);
 
@@ -9338,9 +9339,9 @@ const option = {
 };
 
 onMounted(() => {
-  const pivotChart = new PivotChart(pivotChartRef.value, option);
+  tableInstance.value = new PivotChart(pivotChartRef.value, option);
 
-  pivotChart.on("click_cell", (params) => {
+  tableInstance.value.on("click_cell", (params) => {
     console.log(params);
   });
 });
