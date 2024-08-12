@@ -12,8 +12,6 @@ const inputEditor = new InputEditor();
 const listTableRef = ref();
 const tableInstance = shallowRef();
 
-debugger;
-
 // 注册编辑器到VTable
 VTable.register.editor("name-editor", inputEditor);
 
