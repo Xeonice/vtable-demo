@@ -4,10 +4,18 @@
 
 <script setup>
 import { onMounted, ref, shallowRef } from "vue";
-import { ListTable } from "@visactor/vtable";
+import * as VTable from "@visactor/vtable";
+import { InputEditor } from "@visactor/vtable-editors";
+
+const inputEditor = new InputEditor();
 
 const listTableRef = ref();
 const tableInstance = shallowRef();
+
+debugger;
+
+// 注册编辑器到VTable
+VTable.register.editor("name-editor", inputEditor);
 
 const records = [
   {
@@ -265,6 +273,7 @@ const columns = [
     field: "230517143221027",
     title: "Order ID",
     width: "auto",
+    editor: "name-editor",
   },
   {
     field: "230517143221030",
@@ -322,10 +331,20 @@ const option = {
   records,
   columns,
   widthMode: "standard",
+  enableLineBreak: true,
+  autoWrapText: true,
+  limitMaxAutoWidth: 600,
+  heightMode: "autoHeight",
+  editCellTrigger: "click",
+  keyboardOptions: {
+    copySelected: true,
+    pasteValueToCell: true,
+    selectAllOnCtrlA: true,
+  },
 };
 
 onMounted(() => {
-  tableInstance.value = new ListTable(listTableRef.value, option);
+  tableInstance.value = new VTable.ListTable(listTableRef.value, option);
 
   tableInstance.value.on("click_cell", (params) => {
     console.log(params);
